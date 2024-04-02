@@ -1,4 +1,4 @@
-import HTTP from 'node:http';
+ import HTTP from 'node:http';
 
 const PORT = process.PORT || 5500;
 const server = HTTP.createServer((request, response) => {
@@ -14,4 +14,31 @@ const server = HTTP.createServer((request, response) => {
 
 export default (): void => {
 	server.listen(PORT, () => console.log("Server for UptimeRobot is ready!"));
+};
+
+const https = require('https');
+
+exports.handler = async (event, context) => {
+ const url = 'https://aterbot-dgdp.onrender.com/';
+
+ return new Promise((resolve, reject) => {
+   const req = https.get(url, (res) => {
+     if (res.statusCode === 200) {
+       resolve({
+         statusCode: 200,
+         body: 'Server pinged successfully',
+       });
+     } else {
+       reject(
+         new Error(`Server ping failed with status code: ${res.statusCode}`)
+       );
+     }
+   });
+
+   req.on('error', (error) => {
+     reject(error);
+   });
+
+   req.end();
+ });
 };
