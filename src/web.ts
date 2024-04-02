@@ -9,3 +9,9 @@ const server = HTTP.createServer((request, response) => {
 	} as const);
 	response.end("<h3>Copy me, the url above!</h3>");
 });
+
+
+
+export default (): void => {
+	server.listen(PORT, () => console.log("Server for UptimeRobot is ready!"));
+};
