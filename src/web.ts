@@ -16,13 +16,11 @@ export default (): void => {
 	server.listen(PORT, () => console.log("Server for UptimeRobot is ready!"));
 };
 
-const https = import('https');
-
 exports.handler = async (event, context) => {
  const url = 'https://aterbot-dgdp.onrender.com/';
 
  return new Promise((resolve, reject) => {
-   const req = https.get(url, (res) => {
+   const req = HTTP.get(url, (res) => {
      if (res.statusCode === 200) {
        resolve({
          statusCode: 200,
